@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<!-- saved from url=(0074)https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Google Tag Manager -->
+        <script type="text/javascript" async="" src="./Salt system architecture_files/js"></script><script type="text/javascript" async="" src="./Salt system architecture_files/munchkin.js.download"></script><script src="./Salt system architecture_files/lt.min.js.download"></script><script type="text/javascript" async="" src="./Salt system architecture_files/analytics.js.download"></script><script type="text/javascript" async="" src="./Salt system architecture_files/destination"></script><script async="" src="./Salt system architecture_files/gtm.js.download"></script><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-MCK7VL3');</script>
+        <!-- End Google Tag Manager -->
+
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Salt system architecture</title>
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="1Y-ojT3ndjxA9coB77iUDyXPWxeuQ3T4_r0j-QG6QHg">
+
+        
+        <link rel="stylesheet" href="./Salt system architecture_files/core.min.css">
+        <link rel="stylesheet" href="./Salt system architecture_files/webhelp.min_v1.4.5.css">
+
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="../_static/js/respond.min.js"></script>
+        <![endif]-->
+        <link rel="index" title="Index" href="https://docs.saltproject.io/en/latest/genindex.html">
+        <link rel="search" title="Search" href="https://docs.saltproject.io/en/latest/search.html">
+        <link rel="top" title="" href="https://docs.saltproject.io/en/latest/index.html">
+        <link rel="next" title="Contributing" href="https://docs.saltproject.io/en/latest/topics/contributing-guide.html">
+        <link rel="prev" title="Introduction to Salt" href="https://docs.saltproject.io/en/latest/topics/index.html">
+    <script type="text/javascript" async="" src="./Salt system architecture_files/munchkin(1).js.download"></script><script type="text/javascript" async="" src="./Salt system architecture_files/f.txt"></script></head>
+
+    <body class="index" style="">
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MCK7VL3"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+
+        <!--[if lt IE 8]>
+            <p>You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser.</a></p>
+        <![endif]-->
+
+        <div id="wrapper">
+            <!--start navbar-->
+            <nav id="globalNavbar" class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a href="https://saltproject.io/" target="_blank"><img src="./Salt system architecture_files/SaltProject_altlogo_teal.png" class="nolightbox" height="44.5px" width="125px"></a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="nav navbar-nav">
+                <li><a href="https://docs.saltproject.io/en/latest/">Overview</a></li>
+                <li><a href="https://docs.saltproject.io/salt/user-guide/en/latest/">Salt User Guide</a></li>
+                <li><a href="https://docs.saltproject.io/en/latest/contents.html">Documentation</a></li>
+                <li><a href="https://repo.saltproject.io/">Downloads</a></li>
+                <li><a href="https://docs.saltproject.io/en/latest/topics/development/">Develop</a></li>
+                            <!--<li><a href="/en/2016.3/faq/">FAQ</a></li>
+                            <li><a href="/en/2016.3/samples/">Code Samples</a></li>-->
+                            <!--                <li><a href="https://repo.saltproject.io" target="_blank">Downloads</a></li>-->
+                            <!--<li><a href="http://saltstack.com/training" target="_blank">Training</a></li>
+                            <li><a href="http://saltstack.com/support" target="_blank">Support</a></li>-->
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!--end navbar-->
+            <div id="page-content-wrapper">
+                <div class="container-fluid">
+
+                    <!--start navbar-->
+                    <div class="row">
+                        <div class="col-sm-12 col-md-11 col-md-offset-1 col-lg-10 col-lg-offset-1">
+                            <nav class="pull-left text-muted">
+                                <a href="https://github.com/saltstack/salt/edit/master/doc/topics/salt_system_architecture.rst">Edit on GitHub</a>
+                            </nav>
+                            <nav id="localnav">
+                                <ul class="nav navbar-nav">
+        <li>
+            <a href="https://docs.saltproject.io/en/latest/contents.html" title="Table of Contents">Table of Contents</a>
+            
+        </li>
+        <li>
+            <a href="https://docs.saltproject.io/en/latest/glossary.html" title="Glossary">Glossary</a>
+            
+        </li>
+        <li>
+            <a href="https://docs.saltproject.io/en/latest/topics/index.html" title="Introduction to Salt">previous</a>
+            
+        </li>
+        <li>
+            <a href="https://docs.saltproject.io/en/latest/topics/contributing-guide.html" title="Contributing">next</a>
+            
+        </li>
+        <li>
+            <a href="https://docs.saltproject.io/en/latest/py-modindex.html" title="Salt Module Index">all salt modules</a>
+            
+        </li>
+        <li>
+            <a href="https://docs.saltproject.io/en/latest/http-routingtable.html" title="HTTP Routing Table">routing table</a>
+            
+        </li>
+        <li>
+            <a href="https://docs.saltproject.io/en/latest/genindex.html" title="General Index">index</a>
+            
+        </li> 
+
+                                    
+                                    <li><a class="icon-dl" href="https://docs.saltproject.io/en/pdf/Salt-3007.1.pdf"><img height="25" width="25" class="nolightbox" src="./Salt system architecture_files/pdf_icon.svg"></a></li>
+                                    <li><a class="icon-dl" href="https://docs.saltproject.io/en/epub/Salt-3007.1.epub"><img height="25" width="18" class="nolightbox" src="./Salt system architecture_files/epub_icon.svg"></a></li>
+                                    
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <!--end navbar-->
+
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-11 col-md-offset-1 col-lg-10 col-lg-offset-1">
+
+                            
+
+                            
+                            <div class="body-content">
+                                
+  <section id="salt-system-architecture">
+<span id="id1"></span><h1>Salt system architecture<a class="headerlink" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html#salt-system-architecture" title="Permalink to this heading"><span class="permalink"><i data-container="body" data-toggle="tooltip" data-placement="bottom" title="" class="glyphicon glyphicon-link" data-original-title="Link to this location"></i></span></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html#overview" title="Permalink to this heading"><span class="permalink"><i data-container="body" data-toggle="tooltip" data-placement="bottom" title="" class="glyphicon glyphicon-link" data-original-title="Link to this location"></i></span></a></h2>
+<p>This page provides a high-level overview of the Salt system architecture and its
+different components.</p>
+</section>
+<section id="what-is-salt">
+<h2>What is Salt?<a class="headerlink" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html#what-is-salt" title="Permalink to this heading"><span class="permalink"><i data-container="body" data-toggle="tooltip" data-placement="bottom" title="" class="glyphicon glyphicon-link" data-original-title="Link to this location"></i></span></a></h2>
+<p>Salt is a Python-based open-source remote execution framework used for:</p>
+<ul class="simple">
+<li><p>Configuration management</p></li>
+<li><p>Automation</p></li>
+<li><p>Provisioning</p></li>
+<li><p>Orchestration</p></li>
+</ul>
+</section>
+<section id="the-salt-system-architecture">
+<h2>The Salt system architecture<a class="headerlink" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html#the-salt-system-architecture" title="Permalink to this heading"><span class="permalink"><i data-container="body" data-toggle="tooltip" data-placement="bottom" title="" class="glyphicon glyphicon-link" data-original-title="Link to this location"></i></span></a></h2>
+<p>The following diagram shows the primary components of the basic Salt
+architecture:</p>
+<a class="reference internal image-reference" href="./Salt system architecture_files/salt-architecture.png"><a href="./Salt system architecture_files/salt-architecture.png" data-lightbox="undefined"><img alt="../_images/salt-architecture.png" src="./Salt system architecture_files/salt-architecture.png" style="width: 80%;"></a></a>
+<p>The following sections describe some of the core components of the Salt
+architecture.</p>
+<section id="salt-masters-and-salt-minions">
+<h3>Salt Masters and Salt Minions<a class="headerlink" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html#salt-masters-and-salt-minions" title="Permalink to this heading"><span class="permalink"><i data-container="body" data-toggle="tooltip" data-placement="bottom" title="" class="glyphicon glyphicon-link" data-original-title="Link to this location"></i></span></a></h3>
+<p>Salt uses the master-client model in which a master issues commands to a client
+and the client executes the command. In the Salt ecosystem, the Salt Master is a
+server that is running the <code class="docutils literal notranslate"><span class="pre">salt-master</span></code> service. It issues commands to one or
+more Salt Minions, which are servers that are running the <code class="docutils literal notranslate"><span class="pre">salt-minion</span></code>
+service and that are registered with that particular Salt Master.</p>
+<p>Another way to describe Salt is as a publisher-subscriber model. The master
+publishes jobs that need to be executed and Salt Minions subscribe to those
+jobs. When a specific job applies to that minion, it will execute the job.</p>
+<p>When a minion finishes executing a job, it sends job return data back to the
+master. Salt has two ports used by default for the minions to communicate with
+their master(s). These ports work in concert to receive and deliver data to the
+Message Bus. Salt’s message bus is ZeroMQ, which creates an asynchronous network
+topology to provide the fastest communication possible.</p>
+</section>
+<section id="targets-and-grains">
+<h3>Targets and grains<a class="headerlink" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html#targets-and-grains" title="Permalink to this heading"><span class="permalink"><i data-container="body" data-toggle="tooltip" data-placement="bottom" title="" class="glyphicon glyphicon-link" data-original-title="Link to this location"></i></span></a></h3>
+<p>The master indicates which minions should execute the job by defining a
+<em>target</em>. A target is the group of minions, across one or many masters, that a
+job's Salt command applies to.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A master can also be managed like a minion and can be a target if it is
+running the <code class="docutils literal notranslate"><span class="pre">salt-minion</span></code> service.</p>
+</div>
+<p>The following is an example of one of the many kinds of commands that a master
+might issue to a minion. This command indicates that all minions should install
+the Vim application:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>salt<span class="w"> </span>-v<span class="w"> </span><span class="s1">'*'</span><span class="w"> </span>pkg.install<span class="w"> </span>vim
+</pre></div>
+</div>
+<p>In this case the glob <code class="docutils literal notranslate"><span class="pre">'*'</span></code> is the target, which indicates that all minions
+should execute this command. Many other targeting options are available,
+including targeting a specific minion by its ID or targeting minions by their
+shared traits or characteristics (called <em>grains</em> in Salt).</p>
+<p>Salt comes with an interface to derive information about the underlying system.
+This is called the <em>grains interface</em>, because it presents Salt with grains of
+information. Grains are collected for the operating system, domain name,
+IP address, kernel, OS type, memory, and many other system properties. You can
+also create your own custom grain data.</p>
+<p>Grain data is relatively static. However, grain data is refreshed when system
+information changes (such as network settings) or when a new value is assigned
+to a custom grain.</p>
+</section>
+<section id="open-event-system-event-bus">
+<h3>Open event system (event bus)<a class="headerlink" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html#open-event-system-event-bus" title="Permalink to this heading"><span class="permalink"><i data-container="body" data-toggle="tooltip" data-placement="bottom" title="" class="glyphicon glyphicon-link" data-original-title="Link to this location"></i></span></a></h3>
+<p>The event system is used for inter-process communication between the Salt Master
+and Salt Minions. In the event system:</p>
+<ul class="simple">
+<li><p>Events are seen by both the master and minions.</p></li>
+<li><p>Events can be monitored and evaluated by both.</p></li>
+</ul>
+<p>The event bus lays the groundwork for orchestration and real-time monitoring.</p>
+<p>All minions see jobs and results by subscribing to events published on the event
+system. Salt uses a pluggable event system with two layers:</p>
+<ul class="simple">
+<li><p><strong>ZeroMQ (0MQ)</strong> - The current default socket-level library providing a
+flexible transport layer.</p></li>
+<li><p><strong>Tornado</strong> - Full TCP-based transport layer event system.</p></li>
+</ul>
+<p>One of the greatest strengths of Salt is the speed of execution. The event
+system’s communication bus is more efficient than running a higher-level web
+service (http). The remote execution system is the component that all components
+are built upon, allowing for decentralized remote execution to spread load
+across resources.</p>
+</section>
+<section id="salt-states">
+<h3>Salt states<a class="headerlink" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html#salt-states" title="Permalink to this heading"><span class="permalink"><i data-container="body" data-toggle="tooltip" data-placement="bottom" title="" class="glyphicon glyphicon-link" data-original-title="Link to this location"></i></span></a></h3>
+<p>In addition to remote execution, Salt provides another method for configuring
+minions by declaring which <em>state</em> a minion should be in, otherwise referred to
+as <em>Salt states</em>. Salt states make configuration management possible. You can
+use Salt states to deploy and manage infrastructure with simple YAML files.
+Using states, you can automate recursive and predictable tasks by queueing jobs
+for Salt to implement without needing user input. You can also add more complex
+conditional logic to state files with Jinja.</p>
+<p>To illustrate the subtle differences between remote execution and configuration
+management, take the command referenced in the previous section about
+<a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html#targets-and-grains">Targets and grains</a> in which Salt installed the application Vim on all
+minions:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%">
+<col style="width: 25.0%">
+<col style="width: 50.0%">
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Methodology</p></th>
+<th class="head"><p>Implementation</p></th>
+<th class="head"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Remote execution</p></td>
+<td><ul class="simple">
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">salt</span> <span class="pre">-v</span> <span class="pre">'*'</span> <span class="pre">pkg.install</span> <span class="pre">vim</span></code> from the terminal</p></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li><p>Remotely installs Vim on the targeted minions</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Configuration management</p></td>
+<td><ul class="simple">
+<li><p>Write a YAML state file that checks whether Vim is installed</p></li>
+<li><p>This state file is then applied to the targeted minions</p></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li><p>Ensures that Vim is always installed on the targeted minions</p></li>
+<li><p>Salt analyzes the state file and determines what actions need to be
+taken to ensure the minion complies with the state declarations</p></li>
+<li><p>If Vim is not installed, it automates the processes to install Vim on
+the targeted minions</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The state file that verifies Vim is installed might look like the following
+example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># File:/srv/salt/vim_install.sls</span>
+
+<span class="nt">install_vim_now</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">pkg.installed</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pkgs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vim</span>
+</pre></div>
+</div>
+<p>To apply this state to a minion, you would use the <code class="docutils literal notranslate"><span class="pre">state.apply</span></code> module, such
+as in the following example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>salt<span class="w"> </span><span class="s1">'*'</span><span class="w"> </span>state.apply<span class="w"> </span>vim_install
+</pre></div>
+</div>
+<p>This command applies the <code class="docutils literal notranslate"><span class="pre">vim_install</span></code> state to all minions.</p>
+<p><em>Formulas</em> are collections of states that work in harmony to configure a minion
+or application. For example, one state might trigger another state.</p>
+</section>
+<section id="the-top-file">
+<h3>The Top file<a class="headerlink" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html#the-top-file" title="Permalink to this heading"><span class="permalink"><i data-container="body" data-toggle="tooltip" data-placement="bottom" title="" class="glyphicon glyphicon-link" data-original-title="Link to this location"></i></span></a></h3>
+<p>It is not practical to manually run each state individually targeting specific
+minions each time. Some environments have hundreds of state files targeting
+thousands of minions.</p>
+<p>Salt offers two features to help with this scaling problem:</p>
+<ul class="simple">
+<li><p><strong>The top.sls file</strong> - Maps Salt states to their applicable minions.</p></li>
+<li><p><strong>Highstate execution</strong> - Runs all Salt states outlined in <code class="docutils literal notranslate"><span class="pre">top.sls</span></code> in a
+single execution.</p></li>
+</ul>
+<p>The top file maps which states should be applied to different minions in certain
+environments. The following is an example of a simple top file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># File: /srv/salt/top.sls</span>
+
+<span class="nt">base</span><span class="p">:</span>
+<span class="w">  </span><span class="s">'*'</span><span class="p p-Indicator">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all_server_setup</span>
+
+<span class="w">  </span><span class="s">'01webserver'</span><span class="p p-Indicator">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web_server_setup</span>
+</pre></div>
+</div>
+<p>In this example, <code class="docutils literal notranslate"><span class="pre">base</span></code> refers to the Salt environment, which is the default.
+You can specify more than one environment as needed, such as prod, dev, QA, etc.</p>
+<p>Groups of minions are specified under the environment, and states are listed for
+each set of minions. This top file indicates that a state called
+<code class="docutils literal notranslate"><span class="pre">all_server_setup</span></code> should be applied to all minions <code class="docutils literal notranslate"><span class="pre">'*'</span></code> and the state
+called <code class="docutils literal notranslate"><span class="pre">web_server_setup</span></code> should be applied to the <code class="docutils literal notranslate"><span class="pre">01webserver</span></code> minion.</p>
+<p>To run the Salt command, you would use the state.highstate function:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>salt<span class="w"> </span><span class="se">\*</span><span class="w"> </span>state.highstate
+</pre></div>
+</div>
+<p>This command applies the top file to the targeted minions.</p>
+</section>
+<section id="salt-pillar">
+<h3>Salt pillar<a class="headerlink" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html#salt-pillar" title="Permalink to this heading"><span class="permalink"><i data-container="body" data-toggle="tooltip" data-placement="bottom" title="" class="glyphicon glyphicon-link" data-original-title="Link to this location"></i></span></a></h3>
+<p>Salt’s pillar feature takes data defined on the Salt Master and distributes it
+to minions as needed. Pillar is primarily used to store secrets or other highly
+sensitive data, such as account credentials, cryptographic keys, or passwords.
+Pillar is also useful for storing non-secret data that you don't want to place
+directly in your state files, such as configuration data.</p>
+<p>Salt pillar brings data into the cluster from the opposite direction as grains.
+While grains are data generated from the minion, the pillar is data generated
+from the master.</p>
+<p>Pillars are organized similarly to states in a Pillar state tree, where
+<code class="docutils literal notranslate"><span class="pre">top.sls</span></code> acts to coordinate pillar data to environments and minions privy to
+the data. Information transferred using pillar has a dictionary generated for
+the targeted minion and encrypted with that minion’s key for secure data
+transfer. Pillar data is encrypted on a per-minion basis, which makes it useful
+for storing sensitive data specific to a particular minion.</p>
+</section>
+<section id="beacons-and-reactors">
+<h3>Beacons and reactors<a class="headerlink" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html#beacons-and-reactors" title="Permalink to this heading"><span class="permalink"><i data-container="body" data-toggle="tooltip" data-placement="bottom" title="" class="glyphicon glyphicon-link" data-original-title="Link to this location"></i></span></a></h3>
+<p>The beacon system is a monitoring tool that can listen for a variety of system
+processes on Salt Minions. Beacons can trigger reactors which can then help
+implement a change or troubleshoot an issue. For example, if a service’s
+response times out, the reactor system can restart the service.</p>
+<p>Beacons are used for a variety of purposes, including:</p>
+<ul class="simple">
+<li><p>Automated reporting</p></li>
+<li><p>Error log delivery</p></li>
+<li><p>Microservice monitoring</p></li>
+<li><p>User shell activity</p></li>
+<li><p>Resource monitoring</p></li>
+</ul>
+<p>When coupled with reactors, beacons can create automated pre-written responses
+to infrastructure and application issues. Reactors expand Salt with automated
+responses using pre-written remediation states.</p>
+<p>Reactors can be applied in a variety of scenarios:</p>
+<ul class="simple">
+<li><p>Infrastructure scaling</p></li>
+<li><p>Notifying administrators</p></li>
+<li><p>Restarting failed applications</p></li>
+<li><p>Automatic rollback</p></li>
+</ul>
+<p>When both beacons and reactors are used together , you can create unique states
+customized to your specific needs.</p>
+</section>
+<section id="salt-runners-and-orchestration">
+<h3>Salt runners and orchestration<a class="headerlink" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html#salt-runners-and-orchestration" title="Permalink to this heading"><span class="permalink"><i data-container="body" data-toggle="tooltip" data-placement="bottom" title="" class="glyphicon glyphicon-link" data-original-title="Link to this location"></i></span></a></h3>
+<p>Salt runners are convenience applications executed with the <code class="docutils literal notranslate"><span class="pre">salt-run</span></code>
+command. Salt runners work similarly to Salt execution modules. However, they
+execute on the Salt Master instead of the Salt Minions. A Salt runner can be a
+simple client call or a complex application.</p>
+<p>Salt provides the ability to orchestrate system administrative tasks throughout
+the enterprise. Orchestration makes it possible to coordinate the activities of
+multiple machines from a central place. It has the added advantage of being able
+to control the sequence of when certain configuration events occur.
+Orchestration states execute on the master using the state runner module.</p>
+</section>
+</section>
+</section>
+
+
+                            </div>
+                            <a href="https://docs.saltproject.io/en/latest/topics/index.html"><button data-container="body" data-toggle="tooltip" data-placement="bottom" title="" id="prev-button" type="button" class="btn btn-secondary" data-original-title="Introduction to Salt" fdprocessedid="ubb9kq"><span class="glyphicon glyphicon-chevron-left"></span> Previous</button></a>
+                            <a href="https://docs.saltproject.io/en/latest/topics/contributing-guide.html"><button data-container="body" data-toggle="tooltip" data-placement="bottom" title="" id="next-button" type="button" class="btn btn-primary" data-original-title="Contributing" fdprocessedid="h4chly">
+                                Next <span class="glyphicon glyphicon-chevron-right"></span></button></a>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <hr>
+
+                        <div class="row">
+
+                            
+                            <div class="col-sm-6">
+                            <p><i>Generated on October 23, 2024 at 09:02:06 UTC.</i></p>
+
+                                
+                                <p>You are viewing docs for the latest stable release, 3007.1. Switch to docs for the previous stable release, <a data-container="body" data-toggle="tooltip" data-placement="bottom" title="" href="https://docs.saltproject.io/en/3006/" data-original-title="Docs for the previous stable release">3006.9</a>, or to a recent doc build from the <a data-container="body" data-toggle="tooltip" data-placement="bottom" title="" href="https://docs.saltproject.io/en/master/" data-original-title="Latest docs from the master branch">master</a> branch.</p>
+
+                                
+                                <br>
+                                <p><a href="https://saltproject.io/">saltproject.io</a></p>
+
+                                <div class="footer">
+                                    <p>© 2024 VMware, Inc. | <a href="https://www.vmware.com/help/privacy.html" target="_blank">Privacy Policy</a></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                 <!--
+                                 <a href="https://saltstack.com/saltstack-enterprise/" target="_blank"><img class="nolightbox footer-banner center" src="../_static/images/enterprise_ad.jpg"/></a>
+                                 -->
+                                 <a href="https://docs.saltproject.io/salt/user-guide/en/latest/index.html" target="_blank"><img class="nolightbox footer-banner center" src="./Salt system architecture_files/try_salt_now.png"></a>
+                            </div>
+                            
+                        </div>
+                    </div> <!--end footer-->
+
+                    </div>
+                </div>
+            <!--start sidebar-->
+            <div id="sidebar-wrapper" style="visibility: visible;">
+            <div id="sidebar-static">
+
+<!--                <a class="ss-logo" href="http://saltstack.com"><img width="250" height="63" class="nolightbox sidebar-logo" src="../_static/images/saltstack_logo.svg"></a>
+
+                
+                -->
+                <a href="https://saltproject.io/" target="_blank"><img class="nolightbox sidebar-banner center" src="./Salt system architecture_files/SaltProject_altlogo_teal.png"></a>
+
+
+                
+
+                <div class="releaselinks versions latest">
+
+                <a class="btn btn-secondary" id="previous" title="" data-container="body" data-toggle="tooltip" data-placement="bottom" href="https://docs.saltproject.io/en/3006/" data-original-title="Switch to docs for the previous stable release">3006.9</a>
+
+                <a class="btn btn-secondary active" id="latest" title="" data-container="body" data-toggle="tooltip" data-placement="bottom" href="https://docs.saltproject.io/en/latest/" data-original-title="View release notes">3007.1 <i class="glyphicon glyphicon-ok"></i></a>
+
+                <a class="btn btn-secondary" id="master" title="" data-container="body" data-toggle="tooltip" data-placement="bottom" href="https://docs.saltproject.io/en/master/" data-original-title="Switch to docs built recently from the master branch">Master</a>
+
+                </div>
+
+                
+
+                
+
+                <div id="search-form" class="inner-addon left-addon">
+                    <i class="glyphicon glyphicon-search"></i>
+                    <input type="text" class="form-control" fdprocessedid="ecnzlo">
+                </div>
+
+            </div> <!--end sidebar-static-->
+
+                <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: inherit; height: 550px;"><div id="sidebar-nav" style="overflow: hidden; width: inherit; height: 550px;">
+                    
+                    
+                    
+                    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/about_salt_project.html">Salt Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/index.html">Introduction to Salt</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html#">Salt system architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html#what-is-salt">What is Salt?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html#the-salt-system-architecture">The Salt system architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html#salt-masters-and-salt-minions">Salt Masters and Salt Minions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html#targets-and-grains">Targets and grains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html#open-event-system-event-bus">Open event system (event bus)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html#salt-states">Salt states</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html#the-top-file">The Top file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html#salt-pillar">Salt pillar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html#beacons-and-reactors">Beacons and reactors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html#salt-runners-and-orchestration">Salt runners and orchestration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/contributing-guide.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/maintenance-policy.html">Salt Project maintenance policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/installation/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/configuration/index.html">Configuring Salt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/using_salt.html">Using Salt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/execution/index.html">Remote Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/states/index.html">Configuration Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/return_codes/index.html">Return Codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/utils/index.html">Utility Modules - Code Reuse in Custom Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/event/index.html">Events &amp; Reactor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/orchestrate/index.html">Orchestration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/solaris/index.html">Solaris</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/ssh/index.html">Salt SSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/thorium/index.html">Thorium Complex Reactor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/cloud/index.html">Salt Cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/proxyminion/index.html">Salt Proxy Minion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/network_automation/index.html">Network Automation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/virt/index.html">Salt Virt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/packaging/index.html">Onedir Packaging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/ref/cli/index.html">Command Line Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/ref/pillar/index.html">Pillars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/ref/tops/index.html">Master Tops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/ref/index.html">Salt Module Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/api.html">APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/topology/index.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/cache/index.html">Minion Data Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/slots/index.html">Slots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/windows/index.html">Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/development/index.html">Developing Salt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/releases/index.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/topics/venafi/index.html">Venafi Tools for Salt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://docs.saltproject.io/en/latest/glossary.html">Glossary</a></li>
+</ul>
+
+                    
+                    
+                </div><div class="slimScrollBar" style="background: rgb(0, 0, 0); width: 14px; position: absolute; border-radius: 7px; z-index: 99; right: 1px; top: 0px; height: 197.068px; display: none; opacity: 0.4;"></div><div class="slimScrollRail" style="width: 14px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+
+                <div id="sidebar-static-bottom">
+                <!--<div class="text-nowrap">
+                    &lt;!&ndash;social icons from http://vervex.deviantart.com/art/somacro-45-300dpi-social-media-icons-267955425&ndash;&gt;
+                    <ul id="social-links" class="list-inline">
+                        <li><a data-container="body" data-delay='{ "show": 500, "hide": 100 }' data-toggle="tooltip" data-placement="top" title="watch saltstack videos on youtube" href="https://www.youtube.com/channel/UCpveTIucFx9ljGelW63-BWg" target="_blank"><img class="nolightbox" width="24" src="../_static/images/youtube-variation.png" ></a></li>
+                        <li><a data-container="body" data-delay='{ "show": 500, "hide": 100 }' data-toggle="tooltip" data-placement="top" title="view the latest saltstack tweets" href="https://twitter.com/Salt_Project_OS" target="_blank"><img class="nolightbox" width="24" src="../_static/images/twitter.png" ></a></li>
+                        <li><a data-container="body" data-delay='{ "show": 500, "hide": 100 }' data-toggle="tooltip" data-placement="top" title="subscribe to the salt users mailing list" href="https://groups.google.com/forum/#!forum/salt-users" target="_blank"><img class="nolightbox" width="24" src="../_static/images/email.png" ></a></li>
+                        <li><a data-container="body" data-delay='{ "show": 500, "hide": 100 }' data-toggle="tooltip" data-placement="top" title="download saltstack code from github" href="https://github.com/saltstack/salt" target="_blank"><img class="nolightbox" width="24" src="../_static/images/github.png" ></a></li>
+                        <li><a data-container="body" data-delay='{ "show": 500, "hide": 100 }' data-toggle="tooltip" data-placement="top" title="chat in #salt on liberachat irc" href="https://web.libera.chat/#salt" target="_blank"><img class="nolightbox" width="24" src="../_static/images/messenger-generic.png" ></a></li>
+                        <li><a data-container="body" data-delay='{ "show": 500, "hide": 100 }' data-toggle="tooltip" data-placement="top" title="/r/saltstack" href="http://www.reddit.com/r/saltstack/" target="_blank"><img class="nolightbox" width="24" src="../_static/images/reddit.png" ></a></li>
+                        <li><a data-container="body" data-delay='{ "show": 500, "hide": 100 }' data-toggle="tooltip" data-placement="top" title="ask a saltstack question on stackoverflow" href="https://stackoverflow.com/questions/tagged/salt-stack+or+salt-cloud+or+salt-creation" target="_blank"><img class="nolightbox" width="24" src="../_static/images/stackoverflow.png" ></a></li>
+                        <li><a data-container="body" data-delay='{ "show": 500, "hide": 100 }' data-toggle="tooltip" data-placement="top" title="join or start a saltstack meetup" href="http://www.meetup.com/find/?keywords=saltstack" target="_blank"><img class="nolightbox" width="24" src="../_static/images/meetup.png" ></a></li>
+                        <li><a data-container="body" data-delay='{ "show": 500, "hide": 100 }' data-toggle="tooltip" data-placement="top" title="follow saltstack on linkedin" href="http://www.linkedin.com/company/salt-stack-inc" target="_blank"><img class="nolightbox" width="24" src="../_static/images/linkedin.png" ></a></li>
+                    </ul>
+                </div>-->
+                </div>
+            </div>
+            <!--end sidebar-->
+
+            </div> <!--end wrapper--> <!--end block content-->
+        
+    <script>
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:    '../',
+            VERSION:     '3007.1',
+            SEARCH_CX:   '011515552685726825874:ht0p8miksrm',
+            COLLAPSE_INDEX: false,
+            FILE_SUFFIX: '.html',
+            HAS_SOURCE:  'true',
+            REPO_PRIMARY_BRANCH_TAB_NAME: 'Master'
+        };
+    </script>
+
+    <script type="text/javascript" src="./Salt system architecture_files/core.min.js.download"></script>
+
+    <script type="text/javascript" src="./Salt system architecture_files/webhelp.min_v1.4.4.js.download"></script>
+
+        
+
+        <script id="" text="" charset="" type="text/javascript" src="./Salt system architecture_files/docs.saltstack.com.js.download"></script><script type="text/javascript" id="" charset="">(function(){function b(){!1===c&&(c=!0,Munchkin.init("304-PHQ-615"))}var c=!1,a=document.createElement("script");a.type="text/javascript";a.async=!0;a.src="//munchkin.marketo.net/munchkin.js";a.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||b()};a.onload=b;document.getElementsByTagName("head")[0].appendChild(a)})();</script><script type="text/javascript" id="" charset="">var sf14gv=23943;(function(){var a=document.createElement("script");a.src="https://tracking.leadlander.com/lt.min.js";var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})();</script><!--analytics-->
+        <script type="text/javascript" language="javascript">llactid=23943</script>
+        <iframe allow="join-ad-interest-group" data-tagging-id="AW-975880313/Docs visitors" data-load-time="1730912694689" height="0" width="0" src="./Salt system architecture_files/975880313.html" style="display: none; visibility: hidden;"></iframe><iframe height="0" width="0" style="display: none; visibility: hidden;" src="./Salt system architecture_files/saved_resource.html"></iframe><script type="text/javascript" language="javascript" src="./Salt system architecture_files/trackalyze_secure.js.download"></script>
+
+        
+    
+<div id="lightboxOverlay" class="lightboxOverlay" style="display: block; width: 1523px; height: 5917px;"></div><div id="lightbox" class="lightbox" style="display: block; top: 566px; left: 0px;"><div class="lb-outerContainer animating" style="width: 531px; height: 590px;"><div class="lb-container"><a href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html" data-lightbox="undefined"><img class="lb-image" src="./Salt system architecture_files/salt-architecture.png" style="display: none; width: 523px; height: 582px;"></a><div class="lb-nav" style="display: none;"><a class="lb-prev" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html" style="display: none;"></a><a class="lb-next" href="https://docs.saltproject.io/en/latest/topics/salt_system_architecture.html" style="display: none;"></a></div><div class="lb-loader" style="display: block;"><a class="lb-cancel"></a></div></div></div><div class="lb-dataContainer" style="display: none; width: 531px;"><div class="lb-data"><div class="lb-details"><span class="lb-caption" style="display: none;"></span><span class="lb-number">Image 1 of 2</span></div><div class="lb-closeContainer"><a class="lb-close"></a></div></div></div></div><span id="PING_IFRAME_FORM_DETECTION" style="display: none;"></span></body></html>
